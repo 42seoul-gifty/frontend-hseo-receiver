@@ -1,14 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { css } from '@emotion/react';
-import { AiOutlineUser } from 'react-icons/ai';
 import { ButtonDefault, FONT_SIZE_STYLE } from 'styles/GlobalStyles';
 import Modal from 'components/Modal';
 
 const MainPage: React.FC = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const handleMenuButtonClick = (menu: string) => {
     history.push(`/${menu}`);

@@ -6,11 +6,12 @@ import GoodBad from 'components/GoodBad';
 import GiftList from 'components/GiftList';
 import axios from 'axios';
 import { BASE_URL } from 'config';
+import { RootState } from 'store/configureStore';
 
 const GiftPage: React.FC = () => {
-  const [pageState, setPageState] = useState(0);
   const [productsList, setProductsList] = useState([]);
   const [productCount, setProductCount] = useState(0);
+  const page = useSelector((state: RootState) => state.page);
 
   useEffect(() => {
     const fetchGifts = async () => {
@@ -27,13 +28,7 @@ const GiftPage: React.FC = () => {
     fetchGifts();
   }, []);
 
-  console.log(pageState);
-
-  return pageState > productCount ? (
-    <GiftList pageState={pageState} setPageState={setPageState} />
-  ) : (
-    <GoodBad pageState={pageState} setPageState={setPageState} />
-  );
+  return page > productCount ? <GiftList /> : <GoodBad />;
 };
 
 export default GiftPage;

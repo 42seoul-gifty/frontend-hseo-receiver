@@ -8,21 +8,16 @@ import {
   FONT_SIZE_STYLE,
 } from 'styles/GlobalStyles';
 import { RootState } from 'store/configureStore';
-import { showWarningModal } from 'store/actions/modal';
+import { showModal } from 'store/actions/modal';
 import Modal from 'components/Modal';
 
-interface IProps {
-  pageState: number;
-  setPageState: Dispatch<SetStateAction<number>>;
-}
-
-const GiftList: React.FC<IProps> = ({ pageState, setPageState }) => {
-  const history = useHistory();
+const GiftList: React.FC = () => {
   const dispatch = useDispatch();
+  const page = useSelector((state: RootState) => state.page);
 
   return (
     <div css={Container}>
-      <div>선물 리스트 {pageState}</div>
+      <div>선물 리스트 {page}</div>
 
       <section css={BeforeNextButtonSection}>
         <button type='button'>전체 리스트 보기</button>

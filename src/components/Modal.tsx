@@ -1,21 +1,21 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import ReactDOM, { createPortal } from 'react-dom'
-import { css } from '@emotion/react'
-import { BOX_STYLE, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles/GlobalStyles'
-import { RootState } from 'store/configureStore'
-import { hideModal } from 'store/actions/modal'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import ReactDOM, { createPortal } from 'react-dom';
+import { css } from '@emotion/react';
+import { BOX_STYLE, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles/GlobalStyles';
+import { RootState } from 'store/configureStore';
+import { hideModal } from 'store/actions/modal';
 
 interface IProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 const Modal: React.FC<IProps> = ({ children }) => {
-  const dispatch = useDispatch()
-  const modal = useSelector((state: RootState) => state.modal)
+  const dispatch = useDispatch();
+  const modal = useSelector((state: RootState) => state.modal);
 
   const handleClose = () => {
-    dispatch(hideModal())
-  }
+    dispatch(hideModal());
+  };
 
   const modalComponent = (
     <>
@@ -26,20 +26,17 @@ const Modal: React.FC<IProps> = ({ children }) => {
         </div>
       </div>
     </>
-  )
+  );
 
-  return modal.showAgeModal ||
-    modal.showMyPageModal ||
-    modal.showPriceModal ||
-    modal.showWarningModal
+  return modal.showWarningModal
     ? ReactDOM.createPortal(
         modalComponent,
         document.querySelector('#modal-root') as HTMLElement,
       )
-    : null
-}
+    : null;
+};
 
-export default Modal
+export default Modal;
 
 const Dimmer = css`
   position: fixed;
@@ -50,7 +47,7 @@ const Dimmer = css`
   z-index: 100;
   background-color: #000;
   opacity: 0.5;
-`
+`;
 
 const ModalWrapper = css`
   display: flex;
@@ -68,9 +65,4 @@ const ModalWrapper = css`
   text-align: center;
   margin: 0;
   padding: 40px 30px;
-`
-
-const ModalMessage = css`
-  color: ${COLOR_STYLE.greyDarkest};
-  font-size: ${FONT_SIZE_STYLE.medium};
-`
+`;
