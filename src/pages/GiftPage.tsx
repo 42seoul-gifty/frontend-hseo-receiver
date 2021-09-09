@@ -9,26 +9,14 @@ import { BASE_URL } from 'config';
 import { RootState } from 'store/configureStore';
 
 const GiftPage: React.FC = () => {
-  const [productsList, setProductsList] = useState([]);
-  const [productCount, setProductCount] = useState(0);
   const page = useSelector((state: RootState) => state.page);
+  const receiver = useSelector((state: RootState) => state.receiver.receiver);
 
-  useEffect(() => {
-    const fetchGifts = async () => {
-      try {
-        const res = await axios.get(`${BASE_URL}/receiver`);
-        const products = res.data[0].product;
-        console.log(products);
-        setProductsList(products);
-        setProductCount(products.length);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetchGifts();
-  }, []);
+  if (!receiver) {
+    return null;
+  }
 
-  return page > productCount ? <GiftList /> : <GoodBad />;
+  return page > receiver?.product.length ? <GiftList /> : <GoodBad />;
 };
 
 export default GiftPage;
