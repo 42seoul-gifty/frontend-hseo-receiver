@@ -1,10 +1,10 @@
-import { css } from '@emotion/react'
-import emotionReset from 'emotion-reset'
+import { css } from '@emotion/react';
+import emotionReset from 'emotion-reset';
 
 export const BOX_STYLE = {
   shadow: '0 5px 5px rgb(163, 169, 193, 0.2);',
   shadowDarker: '2px 5px 5px rgb(27, 30, 35, 0.2);',
-}
+};
 
 export const COLOR_STYLE = {
   primary: '#0078d7',
@@ -17,7 +17,7 @@ export const COLOR_STYLE = {
   blue: '#1e84eb',
   green: '#5cb484',
   yellow: '#ffcc00',
-}
+};
 
 export const FONT_SIZE_STYLE = {
   smaller: '0.75rem',
@@ -29,25 +29,25 @@ export const FONT_SIZE_STYLE = {
   largest: '1.8rem',
   huge: '3rem',
   gigantic: '3.75rem',
-}
+};
 
 export const FlexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const FlexColCenter = css`
   ${FlexCenter}
   flex-direction: column;
   justify-content: center;
-`
+`;
 
 export const ButtonDefault = css`
   border: none;
   background-color: inherit;
   cursor: pointer;
-`
+`;
 
 export const MainBtn = css`
   ${ButtonDefault}
@@ -61,14 +61,14 @@ export const MainBtn = css`
   &:hover {
     transform: translateY(-2px);
   }
-`
+`;
 
 export const MainSelectedBtn = css`
   ${MainBtn}
   background-color: ${COLOR_STYLE.primary};
   color: ${COLOR_STYLE.white};
   transition: all 0.3s;
-`
+`;
 
 export const GlobalStyles = css`
   ${emotionReset}
@@ -79,7 +79,7 @@ export const GlobalStyles = css`
   }
   body {
     background-color: ${COLOR_STYLE.white};
-    font-size: 62.5%; // 1rem = 10px
+    font-size: 62.5%;
     font-family: sans-serif;
     height: 100vh;
     width: 100vw;
@@ -95,4 +95,4 @@ export const GlobalStyles = css`
     font-family: Arista Pro Alternate Regular;
     src: url('/assets/font/Arista-Pro-Alternate-Regular-trial.ttf');
   }
-`
+`;

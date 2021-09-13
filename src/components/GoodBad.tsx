@@ -10,24 +10,29 @@ import {
 import { RootState } from 'store/configureStore';
 import Modal from 'components/Modal';
 import { setPageInfo } from 'store/actions/page';
+import { setPreference } from 'store/actions/like';
 
 const GoodBad: React.FC = () => {
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.page);
+  const receiver = useSelector((state: RootState) => state.receiver.receiver);
 
-  const handleClick = (message: string) => {
+  const handleClick = (type: string, id: string) => {
+    dispatch(setPreference(type, id));
     dispatch(setPageInfo());
   };
 
+  const id = receiver?.product[page - 1].id || '';
+
   return (
     <div css={Container}>
-      <div>선물 정보 {page}</div>
+      <div>선물 정보 {`page: ${page} id: ${id}`}</div>
 
       <section css={BeforeNextButtonSection}>
-        <button type='button' onClick={() => handleClick('good')}>
+        <button type='button' onClick={() => handleClick('SET_LIKES', id)}>
           좋아요
         </button>
-        <button type='button' onClick={() => handleClick('bad')}>
+        <button type='button' onClick={() => handleClick('SET_DISLIKES', id)}>
           별로예요
         </button>
       </section>

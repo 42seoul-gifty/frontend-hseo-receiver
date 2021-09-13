@@ -3,7 +3,7 @@ export const BASE_URL = 'https://gifty-mockserver.herokuapp.com';
 export type productObj = {
   description: string;
   detail: string;
-  id: number;
+  id: string;
   image_url: string;
   name: string;
   price: string;

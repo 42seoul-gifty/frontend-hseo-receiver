@@ -23,7 +23,8 @@ const MainPage: React.FC = () => {
         <GiftPage />
       ) : (
         <>
-          {receiver?.name}
+          <h1>{`${receiver?.name}님 선물이 도착했습니다`}</h1>
+
           <button css={MainMenuButton} onClick={handleClick}>
             선물받기
           </button>
@@ -41,11 +42,12 @@ export default MainPage;
 
 const Container = css`
   width: 100%;
+  height: 100%;
   margin: 0 auto;
+  margin-top: 30px;
   max-width: 768px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   font-size: ${FONT_SIZE_STYLE.large};
 `;

@@ -12,11 +12,29 @@ const GiftPage: React.FC = () => {
   const page = useSelector((state: RootState) => state.page);
   const receiver = useSelector((state: RootState) => state.receiver.receiver);
 
+  console.log(receiver?.product);
+  console.log(page);
+
   if (!receiver) {
     return null;
   }
 
-  return page > receiver?.product.length ? <GiftList /> : <GoodBad />;
+  return (
+    <div css={Container}>
+      {page > receiver?.product.length ? <GiftList /> : <GoodBad />}
+    </div>
+  );
 };
 
 export default GiftPage;
+
+const Container = css`
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 768px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+`;
