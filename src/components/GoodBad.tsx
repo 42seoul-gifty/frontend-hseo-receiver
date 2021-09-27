@@ -15,19 +15,22 @@ import { setPreference } from 'store/actions/like';
 const GoodBad: React.FC = () => {
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.page);
-  const receiver = useSelector((state: RootState) => state.receiver.receiver);
+  const choice = useSelector((state: RootState) => state.choice.choice);
 
   const handleClick = (type: string, id: string) => {
     dispatch(setPreference(type, id));
     dispatch(setPageInfo());
   };
 
-  const id = receiver?.product[page - 1].id || '';
+  const currentProduct = choice?.products[page - 1];
+  const id = currentProduct?.id || '';
 
   return (
     <div css={Container}>
-      <div>선물 정보 {`page: ${page} id: ${id}`}</div>
-
+      <h1>선물 정보 {`page: ${page} name: ${currentProduct?.name}`}</h1>
+      <div>
+        <img src={currentProduct?.thumbnail} alt={currentProduct?.name}></img>
+      </div>
       <section css={BeforeNextButtonSection}>
         <button type='button' onClick={() => handleClick('SET_LIKES', id)}>
           좋아요

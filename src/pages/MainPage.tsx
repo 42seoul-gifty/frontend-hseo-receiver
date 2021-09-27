@@ -10,6 +10,7 @@ import GiftPage from './GiftPage';
 
 const MainPage: React.FC = () => {
   const receiver = useSelector((state: RootState) => state.receiver.receiver);
+  const choice = useSelector((state: RootState) => state.choice.choice);
   const page = useSelector((state: RootState) => state.page);
   const dispatch = useDispatch();
 
@@ -17,13 +18,15 @@ const MainPage: React.FC = () => {
     dispatch(setPageInfo());
   };
 
+  console.log(receiver);
+  console.log(choice);
   return (
     <div css={Container}>
       {page ? (
         <GiftPage />
       ) : (
         <>
-          <h1>{`${receiver?.name}님 선물이 도착했습니다`}</h1>
+          <h1>{`${receiver?.name}님, ${choice?.giver_name}님이 보내신 선물이 도착했습니다`}</h1>
 
           <button css={MainMenuButton} onClick={handleClick}>
             선물받기

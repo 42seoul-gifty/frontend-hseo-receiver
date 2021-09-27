@@ -15,10 +15,14 @@ const GiftList: React.FC = () => {
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.page);
   const likes = useSelector((state: RootState) => state.likes);
-  const [showFullList, setShowFullList] = useState(true);
+  const choice = useSelector((state: RootState) => state.choice.choice);
+  const [showFullList, setShowFullList] = useState(false);
 
   const likeProduct: string[] = likes.likes;
-  const dislikeProduct: string[] = likes.dislikes;
+
+  const filtered = choice?.products.filter((product) =>
+    likeProduct.includes(product.id),
+  );
 
   const toggleList = () => {
     setShowFullList((prev) => !prev);
@@ -29,21 +33,29 @@ const GiftList: React.FC = () => {
       <h1>당신이 위시한 선물이에요</h1>
       <h2>사진을 누르면 자세한 정보를 볼 수 있어요</h2>
       <hr />
-      <div>
-        좋아요한 선물{' '}
-        {likeProduct.map((item) => (
-          <div>{item}</div>
-        ))}
-      </div>
-      <div>
-        싫어요한 선물{' '}
-        {dislikeProduct.map((item) => (
-          <div>{item}</div>
-        ))}
-      </div>
+      {showFullList === false ? (
+        <div>
+          {filtered &&
+            filtered.map((item) => (
+              <div key={item.id}>
+                <h3>{item.name}</h3>
+                <img src={item.thumbnail} alt={item.name}></img>
+              </div>
+            ))}
+        </div>
+      ) : (
+        <div>
+          {choice?.products.map((item) => (
+            <div key={item.id}>
+              <h3>{item.name}</h3>
+              <img src={item.thumbnail} alt={item.name}></img>
+            </div>
+          ))}
+        </div>
+      )}
       <section css={BeforeNextButtonSection}>
         <button type='button' onClick={toggleList}>
-          {showFullList ? '전체 리스트 보기' : '좋아요 한 선물만 보기'}
+          {showFullList ? '좋아요 한 선물만 보기' : '전체 리스트 보기'}
         </button>
       </section>
 

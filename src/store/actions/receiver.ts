@@ -3,8 +3,9 @@ import { IReceiver } from 'config';
 export const GET_RECEIVER = 'GET_RECEIVER' as const;
 export const SET_RECEIVER = 'SET_RECEIVER' as const;
 
-export const getReceiver = () => ({
+export const getReceiver = (id: string) => ({
   type: GET_RECEIVER,
+  payload: id,
 });
 
 export const setReceiver = (receiver: IReceiver) => ({
@@ -12,4 +13,6 @@ export const setReceiver = (receiver: IReceiver) => ({
   payload: receiver,
 });
 
-export type ReceiverAction = ReturnType<typeof setReceiver>;
+export type ReceiverAction =
+  | ReturnType<typeof getReceiver>
+  | ReturnType<typeof setReceiver>;

@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import modalReducer from 'store/reducers/modal';
+import choiceReducer from './reducers/choice';
 import likesReducer from './reducers/like';
 import pageReducer from './reducers/page';
 import receiverReducer from './reducers/receiver';
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
   page: pageReducer,
   receiver: receiverReducer,
   likes: likesReducer,
+  choice: choiceReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -10,18 +10,18 @@ import { RootState } from 'store/configureStore';
 
 const GiftPage: React.FC = () => {
   const page = useSelector((state: RootState) => state.page);
-  const receiver = useSelector((state: RootState) => state.receiver.receiver);
+  const choice = useSelector((state: RootState) => state.choice.choice);
 
-  console.log(receiver?.product);
+  console.log(choice?.products);
   console.log(page);
 
-  if (!receiver) {
+  if (!choice) {
     return null;
   }
 
   return (
     <div css={Container}>
-      {page > receiver?.product.length ? <GiftList /> : <GoodBad />}
+      {page > choice?.products.length ? <GiftList /> : <GoodBad />}
     </div>
   );
 };

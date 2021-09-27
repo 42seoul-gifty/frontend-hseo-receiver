@@ -9,11 +9,13 @@ import Header from 'components/Header';
 import { getReceiver } from 'store/actions/receiver';
 import { RootState } from 'store/configureStore';
 import { FONT_SIZE_STYLE } from 'styles/GlobalStyles';
+import { getChoice } from 'store/actions/choice';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getReceiver());
+    dispatch(getReceiver('43'));
+    dispatch(getChoice('43'));
   }, []);
 
   return (

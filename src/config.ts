@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://gifty-mockserver.herokuapp.com';
+export const BASE_URL = 'https://hokim.gifty4u.com';
 
 export type productObj = {
   description: string;
@@ -11,10 +11,17 @@ export type productObj = {
 };
 
 export interface IReceiver {
-  [key: string]: string | productObj[];
+  [key: string]: string | productObj;
   id: string;
   name: string;
   phone: string;
-  product: productObj[];
+  product: productObj;
   address: string;
+}
+
+export interface IChoice {
+  [key: string]: string | productObj[];
+  giver_name: string;
+  giver_phone: string;
+  products: productObj[];
 }
