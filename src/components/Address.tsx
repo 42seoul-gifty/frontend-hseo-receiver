@@ -61,6 +61,7 @@ const Address: React.FC = () => {
       likes: likes.likes,
       dislikes: likes.dislikes,
     };
+    console.log(receiverInfo);
     try {
       const res = await axios({
         method: 'patch',

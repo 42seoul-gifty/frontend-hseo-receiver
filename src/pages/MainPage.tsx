@@ -22,9 +22,7 @@ const MainPage: React.FC = () => {
   console.log(receiver);
   console.log(choice);
 
-  return receiver?.product ? (
-    <ExpiredPage />
-  ) : (
+  return (
     <div css={Container}>
       {page ? (
         <GiftPage />
@@ -37,10 +35,11 @@ const MainPage: React.FC = () => {
           </button>
         </>
       )}
+      {/*}
       <Prompt
         when={true}
         message='페이지를 떠나면 변경사항이 저장되지 않습니다'
-      />
+      />*/}
     </div>
   );
 };
