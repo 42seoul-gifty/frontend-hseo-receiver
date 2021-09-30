@@ -10,6 +10,7 @@ import { RootState } from 'store/configureStore';
 import GiftDetail from 'components/GiftDetail';
 import ReceiverInfo from 'components/ReceiverInfo';
 import { setReceiver } from 'store/actions/receiver';
+import { useHistory } from 'react-router';
 
 const Address: React.FC = () => {
   const dispatch = useDispatch();
@@ -23,15 +24,8 @@ const Address: React.FC = () => {
   const [addedAddress, setAddedAddress] = useState('');
 
   const receiver = useSelector((state: RootState) => state.receiver.receiver);
-  /*
-  const receiverProduct: IReceiver = {
-    id: receiver?.id,
-    name: receiver?.name,
-    phone: receiver?.phone,
-    product: receiver?.product,
-    address: receiver?.address,
-  };
-*/
+  const history = useHistory();
+
   const handleClick = () => {
     window.daum.postcode.load(() => {
       const postcode = new window.daum.Postcode({
@@ -74,6 +68,7 @@ const Address: React.FC = () => {
         data: receiverInfo,
       });
       console.log(res);
+      if (res.data.success) history.push('/last');
     } catch (e) {
       console.log(e);
     }

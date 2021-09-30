@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainPage from 'pages/MainPage';
 import GiftPage from 'pages/GiftPage';
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from 'components/Header';
+import LastPage from 'pages/LastPage';
 import { getReceiver } from 'store/actions/receiver';
 import { RootState } from 'store/configureStore';
 import { FONT_SIZE_STYLE } from 'styles/GlobalStyles';
@@ -14,8 +15,8 @@ import { getChoice } from 'store/actions/choice';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getReceiver('43'));
-    dispatch(getChoice('43'));
+    dispatch(getReceiver('42'));
+    dispatch(getChoice('42'));
   }, []);
 
   const page = useSelector((state: RootState) => state.page);
@@ -28,7 +29,10 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <MainPage />
+      <Switch>
+        <Route path='/last' exact component={LastPage} />
+        <Route path='/' exact component={MainPage} />
+      </Switch>
     </BrowserRouter>
   );
 }

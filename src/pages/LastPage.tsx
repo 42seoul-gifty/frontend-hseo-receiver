@@ -7,45 +7,24 @@ import Modal from 'components/Modal';
 import { RootState } from 'store/configureStore';
 import { setPageInfo } from 'store/actions/page';
 import GiftPage from './GiftPage';
-import ExpiredPage from './ExpiredPage';
 
-const MainPage: React.FC = () => {
-  const receiver = useSelector((state: RootState) => state.receiver.receiver);
+const LastPage: React.FC = () => {
   const choice = useSelector((state: RootState) => state.choice.choice);
-  const page = useSelector((state: RootState) => state.page);
-  const dispatch = useDispatch();
 
-  const handleClick = () => {
-    dispatch(setPageInfo(1));
-  };
+  const handleClick = () => {};
 
-  console.log(receiver);
   console.log(choice);
-
-  return receiver?.product ? (
-    <ExpiredPage />
-  ) : (
+  return (
     <div css={Container}>
-      {page ? (
-        <GiftPage />
-      ) : (
-        <>
-          <h1>{`${receiver?.name}님, ${choice?.giver_name}님이 보내신 선물이 도착했습니다`}</h1>
-
-          <button css={MainMenuButton} onClick={handleClick}>
-            선물받기
-          </button>
-        </>
-      )}
-      <Prompt
-        when={true}
-        message='페이지를 떠나면 변경사항이 저장되지 않습니다'
-      />
+      <h1>{`${choice?.giver_name}님께 감사를 표현하세요!`}</h1>
+      <button css={MainMenuButton} onClick={handleClick}>
+        나도 선물하러 가기
+      </button>
     </div>
   );
 };
 
-export default MainPage;
+export default LastPage;
 
 const Container = css`
   width: 100%;
