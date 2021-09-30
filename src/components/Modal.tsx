@@ -9,6 +9,7 @@ import { hideModal } from 'store/actions/modal';
 interface IProps {
   children: React.ReactNode;
 }
+
 const Modal: React.FC<IProps> = ({ children }) => {
   const dispatch = useDispatch();
   const modal = useSelector((state: RootState) => state.modal);

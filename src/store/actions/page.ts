@@ -1,8 +1,9 @@
 export const SET_PAGE = 'SET_PAGE' as const;
 export const SET_WHOLE_COUNT = 'SET_WHOLE_COUNT' as const;
 
-export const setPageInfo = () => ({
+export const setPageInfo = (num: number) => ({
   type: SET_PAGE,
+  payload: num,
 });
 
 export const setWholeCount = () => ({

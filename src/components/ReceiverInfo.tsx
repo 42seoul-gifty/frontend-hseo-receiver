@@ -12,7 +12,7 @@ import Modal from 'components/Modal';
 import { setPageInfo } from 'store/actions/page';
 import { setPreference } from 'store/actions/like';
 
-const GoodBad: React.FC = () => {
+const ReceiverInfo: React.FC = () => {
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.page);
   const choice = useSelector((state: RootState) => state.choice.choice);
@@ -22,24 +22,10 @@ const GoodBad: React.FC = () => {
     dispatch(setPageInfo(1));
   };
 
-  const currentProduct = choice?.products[page - 1];
-  const id = currentProduct?.id || '';
-
   return (
     <div css={Container}>
-      <h1>선물 정보 {`page: ${page} name: ${currentProduct?.name}`}</h1>
-      <div>
-        <img src={currentProduct?.thumbnail} alt={currentProduct?.name}></img>
-      </div>
-      <section css={BeforeNextButtonSection}>
-        <button type='button' onClick={() => handleClick('SET_LIKES', id)}>
-          좋아요
-        </button>
-        <button type='button' onClick={() => handleClick('SET_DISLIKES', id)}>
-          별로예요
-        </button>
-      </section>
-
+      <h1>주소를 입력하세요</h1>
+      <button>선물받기</button>
       <Modal>
         <h1>error</h1>
       </Modal>
@@ -47,7 +33,7 @@ const GoodBad: React.FC = () => {
   );
 };
 
-export default GoodBad;
+export default ReceiverInfo;
 
 const Container = css`
   width: 100%;

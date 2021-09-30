@@ -7,10 +7,13 @@ import GiftList from 'components/GiftList';
 import axios from 'axios';
 import { BASE_URL } from 'config';
 import { RootState } from 'store/configureStore';
+import GiftDetail from 'components/GiftDetail';
+import ReceiverInfo from 'components/ReceiverInfo';
 
 const GiftPage: React.FC = () => {
   const page = useSelector((state: RootState) => state.page);
   const choice = useSelector((state: RootState) => state.choice.choice);
+  const id = useSelector((state: RootState) => state.id);
 
   console.log(choice?.products);
   console.log(page);
@@ -19,11 +22,19 @@ const GiftPage: React.FC = () => {
     return null;
   }
 
-  return (
-    <div css={Container}>
-      {page > choice?.products.length ? <GiftList /> : <GoodBad />}
-    </div>
-  );
+  const choosePage = () => {
+    if (page <= choice?.products.length) {
+      return <GoodBad />;
+    } else if (page === choice?.products.length + 1) {
+      return <GiftList />;
+    } else if (page === choice?.products.length + 2) {
+      return <GiftDetail detailId={id} />;
+    } else if (page === choice?.products.length + 3) {
+      return <ReceiverInfo />;
+    }
+  };
+
+  return <div css={Container}>{choosePage()}</div>;
 };
 
 export default GiftPage;

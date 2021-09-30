@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { css } from '@emotion/react';
 import { ButtonDefault, FONT_SIZE_STYLE } from 'styles/GlobalStyles';
-
+import { Prompt } from 'react-router';
 import Modal from 'components/Modal';
 import { RootState } from 'store/configureStore';
 import { setPageInfo } from 'store/actions/page';
@@ -15,7 +15,7 @@ const MainPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(setPageInfo());
+    dispatch(setPageInfo(1));
   };
 
   console.log(receiver);
@@ -33,7 +33,10 @@ const MainPage: React.FC = () => {
           </button>
         </>
       )}
-
+      <Prompt
+        when={true}
+        message='페이지를 떠나면 변경사항이 저장되지 않습니다'
+      />
       <Modal>
         <h1>my page</h1>
       </Modal>

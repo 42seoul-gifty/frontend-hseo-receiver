@@ -5,7 +5,7 @@ const initialState: number = 0;
 const pageReducer = (state = initialState, action: PageInfoAction) => {
   switch (action.type) {
     case SET_PAGE:
-      return state + 1;
+      return state + action.payload;
     default:
       return state;
   }

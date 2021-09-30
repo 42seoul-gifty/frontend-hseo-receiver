@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import MainPage from 'pages/MainPage';
 import GiftPage from 'pages/GiftPage';
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Header from 'components/Header';
 import { getReceiver } from 'store/actions/receiver';
 import { RootState } from 'store/configureStore';
@@ -18,11 +18,18 @@ function App() {
     dispatch(getChoice('43'));
   }, []);
 
+  const page = useSelector((state: RootState) => state.page);
+  const [naviState, setNaviState] = useState(false);
+
+  useEffect(() => {
+    if (page) setNaviState(true);
+  }, [page]);
+
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <MainPage />
-    </>
+    </BrowserRouter>
   );
 }
 

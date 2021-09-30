@@ -11,12 +11,12 @@ export type productObj = {
 };
 
 export interface IReceiver {
-  [key: string]: string | productObj;
-  id: string;
-  name: string;
-  phone: string;
-  product: productObj;
-  address: string;
+  [key: string]: string | productObj | undefined;
+  id: string | undefined;
+  name: string | undefined;
+  phone: string | undefined;
+  product: productObj | undefined;
+  address: string | undefined;
 }
 
 export interface IChoice {

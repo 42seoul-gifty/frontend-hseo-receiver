@@ -9,6 +9,10 @@ import {
 import { RootState } from 'store/configureStore';
 import { showModal } from 'store/actions/modal';
 import Modal from 'components/Modal';
+import { setPageInfo } from 'store/actions/page';
+import { productObj } from 'config';
+import GiftDetail from './GiftDetail';
+import { setId } from 'store/actions/detailId';
 
 const GiftList: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +20,7 @@ const GiftList: React.FC = () => {
   const likes = useSelector((state: RootState) => state.likes);
   const choice = useSelector((state: RootState) => state.choice.choice);
   const [showFullList, setShowFullList] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState('');
 
   const likeProduct: string[] = likes.likes;
 
@@ -27,6 +32,11 @@ const GiftList: React.FC = () => {
     setShowFullList((prev) => !prev);
   };
 
+  const handleClick = (id: string) => {
+    dispatch(setId(id));
+    dispatch(setPageInfo(1));
+  };
+
   return (
     <div css={Container}>
       <h1>당신이 위시한 선물이에요</h1>
@@ -36,19 +46,19 @@ const GiftList: React.FC = () => {
         <div>
           {filtered &&
             filtered.map((item) => (
-              <div key={item.id}>
+              <button key={item.id} onClick={() => handleClick(item.id)}>
                 <h3>{item.name}</h3>
                 <img src={item.thumbnail} alt={item.name}></img>
-              </div>
+              </button>
             ))}
         </div>
       ) : (
         <div>
           {choice?.products.map((item) => (
-            <div key={item.id}>
+            <button key={item.id} onClick={() => handleClick(item.id)}>
               <h3>{item.name}</h3>
               <img src={item.thumbnail} alt={item.name}></img>
-            </div>
+            </button>
           ))}
         </div>
       )}

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { css } from '@emotion/react';
 import {
@@ -10,20 +9,39 @@ import {
 import { RootState } from 'store/configureStore';
 import Modal from 'components/Modal';
 import { setPageInfo } from 'store/actions/page';
-import { setPreference } from 'store/actions/like';
+import { setReceiver } from 'store/actions/receiver';
+import { IReceiver, productObj } from 'config';
 
-const GoodBad: React.FC = () => {
+interface IProps {
+  detailId: string;
+}
+
+const GiftDetail: React.FC<IProps> = ({ detailId }) => {
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.page);
   const choice = useSelector((state: RootState) => state.choice.choice);
+  const receiver = useSelector((state: RootState) => state.receiver.receiver);
 
-  const handleClick = (type: string, id: string) => {
-    dispatch(setPreference(type, id));
+  const currentProduct = choice?.products.filter(
+    (product) => product.id === detailId,
+  )[0];
+  const receiverProduct: IReceiver = {
+    id: receiver?.id,
+    name: receiver?.name,
+    phone: receiver?.phone,
+    product: currentProduct,
+    address: receiver?.address,
+  };
+
+  const handleNext = () => {
+    dispatch(setReceiver(receiverProduct));
+    console.log(receiver);
     dispatch(setPageInfo(1));
   };
 
-  const currentProduct = choice?.products[page - 1];
-  const id = currentProduct?.id || '';
+  const handleBefore = () => {
+    dispatch(setPageInfo(-1));
+  };
 
   return (
     <div css={Container}>
@@ -32,11 +50,11 @@ const GoodBad: React.FC = () => {
         <img src={currentProduct?.thumbnail} alt={currentProduct?.name}></img>
       </div>
       <section css={BeforeNextButtonSection}>
-        <button type='button' onClick={() => handleClick('SET_LIKES', id)}>
-          좋아요
+        <button type='button' onClick={handleBefore}>
+          다른 선물 보기
         </button>
-        <button type='button' onClick={() => handleClick('SET_DISLIKES', id)}>
-          별로예요
+        <button type='button' onClick={handleNext}>
+          선택하기
         </button>
       </section>
 
@@ -47,7 +65,7 @@ const GoodBad: React.FC = () => {
   );
 };
 
-export default GoodBad;
+export default GiftDetail;
 
 const Container = css`
   width: 100%;
