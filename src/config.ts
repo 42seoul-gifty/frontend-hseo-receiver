@@ -1,3 +1,5 @@
+import internal from 'stream';
+
 export const BASE_URL = 'https://hokim.gifty4u.com';
 
 export type productObj = {
@@ -15,7 +17,7 @@ export interface IReceiver {
   id: string | undefined;
   name: string | undefined;
   phone: string | undefined;
-  product: productObj | undefined;
+  product: string | undefined;
   address: string | undefined;
 }
 
@@ -24,4 +26,13 @@ export interface IChoice {
   giver_name: string;
   giver_phone: string;
   products: productObj[];
+}
+
+export interface IAddressInfo {
+  product_id: number;
+  post_code: string;
+  address: string;
+  address_detail: string;
+  likes: string[];
+  dislikes: string[];
 }

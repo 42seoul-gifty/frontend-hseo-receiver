@@ -29,7 +29,7 @@ const GiftDetail: React.FC<IProps> = ({ detailId }) => {
     id: receiver?.id,
     name: receiver?.name,
     phone: receiver?.phone,
-    product: currentProduct,
+    product: detailId,
     address: receiver?.address,
   };
 
