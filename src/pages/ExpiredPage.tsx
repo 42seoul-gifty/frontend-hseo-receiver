@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { css } from '@emotion/react';
-import { ButtonDefault, FONT_SIZE_STYLE } from 'styles/GlobalStyles';
+import { FONT_SIZE_STYLE } from 'styles/GlobalStyles';
 
 const ExpiredPage: React.FC = () => {
   return (

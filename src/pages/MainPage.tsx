@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { css } from '@emotion/react';
+
 import { ButtonDefault, FONT_SIZE_STYLE } from 'styles/GlobalStyles';
-import { Prompt } from 'react-router';
-import Modal from 'components/Modal';
 import { RootState } from 'store/configureStore';
 import { setPageInfo } from 'store/actions/page';
 import GiftPage from './GiftPage';
-import ExpiredPage from './ExpiredPage';
 
 const MainPage: React.FC = () => {
   const receiver = useSelector((state: RootState) => state.receiver.receiver);
@@ -18,9 +16,6 @@ const MainPage: React.FC = () => {
   const handleClick = () => {
     dispatch(setPageInfo(1));
   };
-
-  console.log(receiver);
-  console.log(choice);
 
   return (
     <div css={Container}>

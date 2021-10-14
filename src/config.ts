@@ -1,11 +1,7 @@
-import internal from 'stream';
-
-export const BASE_URL = 'https://hokim.gifty4u.com';
-
 export type productObj = {
   description: string;
   detail: string;
-  id: string;
+  id: number;
   image_url: string;
   name: string;
   price: string;
@@ -13,11 +9,11 @@ export type productObj = {
 };
 
 export interface IReceiver {
-  [key: string]: string | productObj | undefined;
+  [key: string]: string | number | undefined;
   id: string | undefined;
   name: string | undefined;
   phone: string | undefined;
-  product: string | undefined;
+  product: number | undefined;
   address: string | undefined;
 }
 
@@ -33,6 +29,6 @@ export interface IAddressInfo {
   post_code: string;
   address: string;
   address_detail: string;
-  likes: string[];
-  dislikes: string[];
+  likes: number[];
+  dislikes: number[];
 }

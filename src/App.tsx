@@ -13,9 +13,11 @@ import ExpiredPage from 'pages/ExpiredPage';
 
 function App() {
   const dispatch = useDispatch();
+  const receiverId = 'qmk94b';
+
   useEffect(() => {
-    dispatch(getReceiver('44'));
-    dispatch(getChoice('44'));
+    dispatch(getReceiver(receiverId));
+    dispatch(getChoice(receiverId));
   }, []);
 
   const page = useSelector((state: RootState) => state.page);

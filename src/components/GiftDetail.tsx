@@ -7,13 +7,12 @@ import {
   FONT_SIZE_STYLE,
 } from 'styles/GlobalStyles';
 import { RootState } from 'store/configureStore';
-import Modal from 'components/Modal';
 import { setPageInfo } from 'store/actions/page';
 import { setReceiver } from 'store/actions/receiver';
 import { IReceiver, productObj } from 'config';
 
 interface IProps {
-  detailId: string;
+  detailId: number;
 }
 
 const GiftDetail: React.FC<IProps> = ({ detailId }) => {
@@ -57,10 +56,6 @@ const GiftDetail: React.FC<IProps> = ({ detailId }) => {
           선택하기
         </button>
       </section>
-
-      <Modal>
-        <h1>error</h1>
-      </Modal>
     </div>
   );
 };

@@ -8,7 +8,6 @@ import {
   FONT_SIZE_STYLE,
 } from 'styles/GlobalStyles';
 import { RootState } from 'store/configureStore';
-import Modal from 'components/Modal';
 import { setPageInfo } from 'store/actions/page';
 import { setPreference } from 'store/actions/like';
 
@@ -17,13 +16,13 @@ const GoodBad: React.FC = () => {
   const page = useSelector((state: RootState) => state.page);
   const choice = useSelector((state: RootState) => state.choice.choice);
 
-  const handleClick = (type: string, id: string) => {
+  const handleClick = (type: string, id: number) => {
     dispatch(setPreference(type, id));
     dispatch(setPageInfo(1));
   };
 
   const currentProduct = choice?.products[page - 1];
-  const id = currentProduct?.id || '';
+  const id = currentProduct?.id || 0;
 
   return (
     <div css={Container}>
@@ -39,10 +38,6 @@ const GoodBad: React.FC = () => {
           별로예요
         </button>
       </section>
-
-      <Modal>
-        <h1>error</h1>
-      </Modal>
     </div>
   );
 };

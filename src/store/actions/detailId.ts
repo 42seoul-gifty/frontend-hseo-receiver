@@ -1,6 +1,6 @@
 export const SET_ID = 'SET_ID' as const;
 
-export const setId = (id: string) => ({
+export const setId = (id: number) => ({
   type: SET_ID,
   payload: id,
 });

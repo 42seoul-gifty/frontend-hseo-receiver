@@ -1,6 +1,6 @@
 import { IdAction, SET_ID } from 'store/actions/detailId';
 
-const initialState: string = '';
+const initialState: number = -1;
 
 const idReducer = (state = initialState, action: IdAction) => {
   switch (action.type) {

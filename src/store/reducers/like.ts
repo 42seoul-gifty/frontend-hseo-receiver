@@ -1,8 +1,8 @@
 import { LikesAction, SET_LIKES, SET_DISLIKES } from 'store/actions/like';
 
 export type Preference = {
-  likes: string[];
-  dislikes: string[];
+  likes: number[];
+  dislikes: number[];
 };
 const initialState: Preference = {
   likes: [],

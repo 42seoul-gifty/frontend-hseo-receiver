@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { css } from '@emotion/react';
 
 import GoodBad from 'components/GoodBad';
 import GiftList from 'components/GiftList';
-import axios from 'axios';
-import { BASE_URL } from 'config';
 import { RootState } from 'store/configureStore';
 import GiftDetail from 'components/GiftDetail';
 import ReceiverInfo from 'components/ReceiverInfo';
@@ -14,9 +12,6 @@ const GiftPage: React.FC = () => {
   const page = useSelector((state: RootState) => state.page);
   const choice = useSelector((state: RootState) => state.choice.choice);
   const id = useSelector((state: RootState) => state.id);
-
-  console.log(choice?.products);
-  console.log(page);
 
   if (!choice) {
     return null;

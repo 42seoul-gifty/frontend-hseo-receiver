@@ -7,22 +7,16 @@ import {
   FONT_SIZE_STYLE,
 } from 'styles/GlobalStyles';
 import { RootState } from 'store/configureStore';
-import { showModal } from 'store/actions/modal';
-import Modal from 'components/Modal';
 import { setPageInfo } from 'store/actions/page';
-import { productObj } from 'config';
-import GiftDetail from './GiftDetail';
 import { setId } from 'store/actions/detailId';
 
 const GiftList: React.FC = () => {
   const dispatch = useDispatch();
-  const page = useSelector((state: RootState) => state.page);
   const likes = useSelector((state: RootState) => state.likes);
   const choice = useSelector((state: RootState) => state.choice.choice);
   const [showFullList, setShowFullList] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState('');
 
-  const likeProduct: string[] = likes.likes;
+  const likeProduct: number[] = likes.likes;
 
   const filtered = choice?.products.filter((product) =>
     likeProduct.includes(product.id),
@@ -32,7 +26,7 @@ const GiftList: React.FC = () => {
     setShowFullList((prev) => !prev);
   };
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: number) => {
     dispatch(setId(id));
     dispatch(setPageInfo(1));
   };
@@ -67,10 +61,6 @@ const GiftList: React.FC = () => {
           {showFullList ? '좋아요 한 선물만 보기' : '전체 리스트 보기'}
         </button>
       </section>
-
-      <Modal>
-        <h1>error</h1>
-      </Modal>
     </div>
   );
 };

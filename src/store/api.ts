@@ -1,10 +1,9 @@
-import axios from 'axios';
-import { BASE_URL } from 'config';
+import api from 'api';
 
 export const requestGetReceiver = (id: string) => {
-  return axios.get(`${BASE_URL}/receiver/${id}`);
+  return api.get(`/receiver/${id}`);
 };
 
 export const requestGetChoice = (id: string) => {
-  return axios.get(`${BASE_URL}/receiver/${id}/choice`);
+  return api.get(`/receiver/${id}/choice`);
 };

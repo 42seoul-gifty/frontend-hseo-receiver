@@ -2,26 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { css } from '@emotion/react';
 
-import GoodBad from 'components/GoodBad';
-import GiftList from 'components/GiftList';
-import axios from 'axios';
-import { BASE_URL, IAddressInfo, IReceiver } from 'config';
+import { IAddressInfo, IReceiver } from 'config';
 import { RootState } from 'store/configureStore';
-import GiftDetail from 'components/GiftDetail';
-import ReceiverInfo from 'components/ReceiverInfo';
-import { setReceiver } from 'store/actions/receiver';
+import api from 'api';
 import { useHistory } from 'react-router';
 
 const Address: React.FC = () => {
-  const dispatch = useDispatch();
-  const page = useSelector((state: RootState) => state.page);
-  const choice = useSelector((state: RootState) => state.choice.choice);
   const id = useSelector((state: RootState) => state.id);
   const likes = useSelector((state: RootState) => state.likes);
 
-  const [post, setPost] = useState('');
-  const [address, setAddress] = useState('');
-  const [addedAddress, setAddedAddress] = useState('');
+  const [addressInfo, setAddressInfo] = useState({
+    post_code: '',
+    address: '',
+    address_detail: '',
+  });
 
   const receiver = useSelector((state: RootState) => state.receiver.receiver);
   const history = useHistory();
@@ -31,8 +25,11 @@ const Address: React.FC = () => {
       const postcode = new window.daum.Postcode({
         oncomplete: (data) => {
           const toBuildingAddress = `${data.address} ${data.buildingName}`;
-          setAddress(toBuildingAddress);
-          setPost(data.zonecode.toString());
+          setAddressInfo((prev) => ({
+            ...prev,
+            post_code: data.zonecode.toString(),
+            address: toBuildingAddress,
+          }));
         },
         onsearch: (data) => {
           console.log(data);
@@ -51,21 +48,21 @@ const Address: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const finalAddress = `${post} ${address} ${addedAddress}`;
+    const finalAddress = `${addressInfo.post_code} ${addressInfo.address} ${addressInfo.address_detail}`;
     console.log(finalAddress);
     const receiverInfo: IAddressInfo = {
       product_id: Number(id),
-      post_code: post,
-      address: address,
-      address_detail: addedAddress,
+      post_code: addressInfo.post_code,
+      address: addressInfo.address,
+      address_detail: addressInfo.address_detail,
       likes: likes.likes,
       dislikes: likes.dislikes,
     };
     console.log(receiverInfo);
     try {
-      const res = await axios({
+      const res = await api({
         method: 'patch',
-        url: `${BASE_URL}/receiver/${receiver?.id}`,
+        url: `/receiver/${receiver?.id}`,
         data: receiverInfo,
       });
       console.log(res);
@@ -76,22 +73,32 @@ const Address: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddedAddress(e.target.value);
+    //setAddedAddress(e.target.value);
+    setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
   };
 
   return (
     <div css={Container}>
       <form onSubmit={handleSubmit}>
-        <input placeholder='우편번호' value={post}></input>
+        <input
+          placeholder='우편번호'
+          value={addressInfo.post_code}
+          onChange={handleChange}
+        ></input>
         <button type='button' onClick={handleClick}>
           주소 찾기
         </button>
         <br />
-        <input placeholder='주소' value={address}></input>
+        <input
+          placeholder='주소'
+          value={addressInfo.address}
+          onChange={handleChange}
+        ></input>
         <br />
         <input
           placeholder='상세주소'
-          value={addedAddress}
+          value={addressInfo.address_detail}
+          name='address_detail'
           onChange={handleChange}
         ></input>
         <br />
