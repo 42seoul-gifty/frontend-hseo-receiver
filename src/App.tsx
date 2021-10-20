@@ -13,7 +13,8 @@ import ExpiredPage from 'pages/ExpiredPage';
 
 function App() {
   const dispatch = useDispatch();
-  const receiverId = 'qmk94b';
+  const pathname = new URL(window.location.href).pathname.split('/');
+  const receiverId = pathname[1];
 
   useEffect(() => {
     dispatch(getReceiver(receiverId));
@@ -35,7 +36,7 @@ function App() {
         <Route path='/last' exact component={LastPage} />
         <Route
           path='/'
-          exact
+          //exact
           render={() => {
             if (receiver?.product && page === 0) return <ExpiredPage />;
             else return <MainPage />;
